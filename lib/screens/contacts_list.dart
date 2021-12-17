@@ -6,6 +6,8 @@ import 'package:bytebank/screens/transaction_form.dart';
 import 'package:flutter/material.dart';
 
 class ContactsList extends StatefulWidget {
+  const ContactsList({Key? key}) : super(key: key);
+
   @override
   _ContactsListState createState() => _ContactsListState();
 }
@@ -18,10 +20,10 @@ class _ContactsListState extends State<ContactsList> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).primaryColor,
-        title: Text('Transfer'),
+        title: const Text('Transfer'),
       ),
       body: FutureBuilder<List<Contact>>(
-        initialData: [],
+        initialData: const [],
         future: _dao.findAll(),
         builder: (context, snapshot) {
           switch (snapshot.connectionState) {
@@ -50,7 +52,7 @@ class _ContactsListState extends State<ContactsList> {
                 itemCount: contacts!.length,
               );
           }
-          return Text('Unknown error');
+          return const Text('Unknown error');
         },
       ),
       floatingActionButton: FloatingActionButton(
@@ -63,7 +65,7 @@ class _ContactsListState extends State<ContactsList> {
               )
               .then((value) => setState(() {}));
         },
-        child: Icon(
+        child: const Icon(
           Icons.add,
         ),
       ),
@@ -84,13 +86,13 @@ class _ContactItem extends StatelessWidget {
         onTap: () => onClick(),
         title: Text(
           contact.name,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 24.0,
           ),
         ),
         subtitle: Text(
           contact.accountNumber.toString(),
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 16.0,
           ),
         ),

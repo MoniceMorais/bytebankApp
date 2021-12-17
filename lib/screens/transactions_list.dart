@@ -1,6 +1,5 @@
 import 'package:bytebank/components/centered_message.dart';
 import 'package:bytebank/components/progress.dart';
-import 'package:bytebank/http/webclient.dart';
 import 'package:bytebank/http/webclients/transaction_webclient.dart';
 import 'package:bytebank/models/transaction.dart';
 import 'package:flutter/material.dart';
@@ -38,14 +37,14 @@ class TransactionsList extends StatelessWidget {
                           leading: Icon(Icons.monetization_on),
                           title: Text(
                             transaction.value.toString(),
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 24.0,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
                           subtitle: Text(
                             transaction.contact.accountNumber.toString(),
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 16.0,
                             ),
                           ),

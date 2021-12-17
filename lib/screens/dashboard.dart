@@ -8,7 +8,7 @@ class Dashboard extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).primaryColor,
-        title: Text('Dashboard'),
+        title: const Text('Dashboard'),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -40,7 +40,7 @@ class Dashboard extends StatelessWidget {
   void _showContactsList(BuildContext context) {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => ContactsList(),
+        builder: (context) => const ContactsList(),
       ),
     );
   }
@@ -75,7 +75,7 @@ class _FeatureItem extends StatelessWidget {
         child: InkWell(
           onTap: () => onClick(),
           child: Container(
-            padding: EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(8.0),
             height: 100,
             width: 150,
             child: Column(
@@ -89,7 +89,7 @@ class _FeatureItem extends StatelessWidget {
                 ),
                 Text(
                   name,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.white,
                     fontSize: 16.0,
                   ),
