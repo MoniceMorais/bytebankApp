@@ -16,13 +16,13 @@ class TransactionAuthDialog extends StatelessWidget {
         style: TextStyle(fontSize: 64, letterSpacing: 32),
       ),
       actions: <Widget>[
-        FlatButton(
+        TextButton(
           onPressed: () {
             print('cancel');
           },
           child: Text('Cancel'),
         ),
-        FlatButton(
+        TextButton(
           onPressed: () {
             print('confirm');
           },
