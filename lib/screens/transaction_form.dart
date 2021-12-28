@@ -87,13 +87,14 @@ class _TransactionFormState extends State<TransactionForm> {
     );
   }
 
-  void _save(Transaction transactionCreated, String password, BuildContext context) {
-    _webClient
-        .save(transactionCreated, password)
-        .then((transaction) {
+  void _save(
+      Transaction transactionCreated, String password, BuildContext context) {
+    _webClient.save(transactionCreated, password).then((transaction) {
       if (transaction != null) {
         Navigator.pop(context);
       }
+    }).catchError((e) {
+      print(e);
     });
   }
 }
