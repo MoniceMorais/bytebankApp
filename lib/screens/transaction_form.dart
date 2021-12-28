@@ -1,3 +1,4 @@
+import 'package:bytebank/components/transaction_auth_dialog.dart';
 import 'package:bytebank/http/webclients/transaction_webclient.dart';
 import 'package:bytebank/models/contact.dart';
 import 'package:bytebank/models/transaction.dart';
@@ -50,7 +51,8 @@ class _TransactionFormState extends State<TransactionForm> {
                   controller: _valueController,
                   style: const TextStyle(fontSize: 24.0),
                   decoration: const InputDecoration(labelText: 'Value'),
-                  keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                  keyboardType:
+                      const TextInputType.numberWithOptions(decimal: true),
                 ),
               ),
               Padding(
@@ -58,15 +60,23 @@ class _TransactionFormState extends State<TransactionForm> {
                 child: SizedBox(
                   width: double.maxFinite,
                   child: ElevatedButton(
-                    child: const Text('Transfer'), onPressed: () {
-                      final double? value = double.tryParse(_valueController.text);
-                      final transactionCreated = Transaction(value!, widget.contact);
-                      _webClient.save(transactionCreated).then((transaction) {
-                        if(transaction != null){
-                          Navigator.pop(context);
-                        }
-                      });
-                  },
+                    child: const Text('Transfer'),
+                    onPressed: () {
+                      final double? value =
+                          double.tryParse(_valueController.text);
+                      final transactionCreated =
+                          Transaction(value!, widget.contact);
+                      showDialog(
+                        context: context,
+                        builder: (contextDialog) {
+                          return TransactionAuthDialog(
+                            onConfirm: (String password) {
+                              _save(transactionCreated, password, context);
+                            },
+                          );
+                        },
+                      );
+                    },
                   ),
                 ),
               )
@@ -75,5 +85,15 @@ class _TransactionFormState extends State<TransactionForm> {
         ),
       ),
     );
+  }
+
+  void _save(Transaction transactionCreated, String password, BuildContext context) {
+    _webClient
+        .save(transactionCreated, password)
+        .then((transaction) {
+      if (transaction != null) {
+        Navigator.pop(context);
+      }
+    });
   }
 }
